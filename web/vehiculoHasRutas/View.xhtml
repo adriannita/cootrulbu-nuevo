@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VehiculoHasRutasViewDlg" widgetVar="VehiculoHasRutasViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVehiculoHasRutasTitle}">
+            <h:form id="VehiculoHasRutasViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vehiculoHasRutasController.selected != null}">
+                        <h:outputText value="#{bundle.ViewVehiculoHasRutasLabel_idVehiculosRuta}"/>
+                        <h:outputText value="#{vehiculoHasRutasController.selected.idVehiculosRuta}" title="#{bundle.ViewVehiculoHasRutasTitle_idVehiculosRuta}"/>
+                        <h:outputText value="#{bundle.ViewVehiculoHasRutasLabel_valorRuta}"/>
+                        <h:outputText value="#{vehiculoHasRutasController.selected.valorRuta}" title="#{bundle.ViewVehiculoHasRutasTitle_valorRuta}"/>
+                        <h:outputText value="#{bundle.ViewVehiculoHasRutasLabel_rutasCodigoRuta}"/>
+                        <h:outputText value="#{vehiculoHasRutasController.selected.rutasCodigoRuta}" title="#{bundle.ViewVehiculoHasRutasTitle_rutasCodigoRuta}"/>
+                        <h:outputText value="#{bundle.ViewVehiculoHasRutasLabel_vehiculoPlaca}"/>
+                        <h:outputText value="#{vehiculoHasRutasController.selected.vehiculoPlaca}" title="#{bundle.ViewVehiculoHasRutasTitle_vehiculoPlaca}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="VehiculoHasRutasViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

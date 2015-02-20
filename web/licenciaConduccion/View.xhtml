@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LicenciaConduccionViewDlg" widgetVar="LicenciaConduccionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewLicenciaConduccionTitle}">
+            <h:form id="LicenciaConduccionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{licenciaConduccionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewLicenciaConduccionLabel_numero}"/>
+                        <h:outputText value="#{licenciaConduccionController.selected.numero}" title="#{bundle.ViewLicenciaConduccionTitle_numero}"/>
+                        <h:outputText value="#{bundle.ViewLicenciaConduccionLabel_fechaNacimiento}"/>
+                        <h:outputText value="#{licenciaConduccionController.selected.fechaNacimiento}" title="#{bundle.ViewLicenciaConduccionTitle_fechaNacimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewLicenciaConduccionLabel_fechaExpedicion}"/>
+                        <h:outputText value="#{licenciaConduccionController.selected.fechaExpedicion}" title="#{bundle.ViewLicenciaConduccionTitle_fechaExpedicion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewLicenciaConduccionLabel_fechaVencimiento}"/>
+                        <h:outputText value="#{licenciaConduccionController.selected.fechaVencimiento}" title="#{bundle.ViewLicenciaConduccionTitle_fechaVencimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewLicenciaConduccionLabel_restricciones}"/>
+                        <h:outputText value="#{licenciaConduccionController.selected.restricciones}" title="#{bundle.ViewLicenciaConduccionTitle_restricciones}"/>
+                        <h:outputText value="#{bundle.ViewLicenciaConduccionLabel_conductoresCedula}"/>
+                        <h:outputText value="#{licenciaConduccionController.selected.conductoresCedula}" title="#{bundle.ViewLicenciaConduccionTitle_conductoresCedula}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="LicenciaConduccionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VehiculoHasRutasCreateDlg" widgetVar="VehiculoHasRutasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVehiculoHasRutasTitle}">
+            <h:form id="VehiculoHasRutasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vehiculoHasRutasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVehiculoHasRutasLabel_idVehiculosRuta}" for="idVehiculosRuta" />
+                        <p:inputText id="idVehiculosRuta" value="#{vehiculoHasRutasController.selected.idVehiculosRuta}" title="#{bundle.CreateVehiculoHasRutasTitle_idVehiculosRuta}" required="true" requiredMessage="#{bundle.CreateVehiculoHasRutasRequiredMessage_idVehiculosRuta}"/>
+                        <p:outputLabel value="#{bundle.CreateVehiculoHasRutasLabel_valorRuta}" for="valorRuta" />
+                        <p:inputText id="valorRuta" value="#{vehiculoHasRutasController.selected.valorRuta}" title="#{bundle.CreateVehiculoHasRutasTitle_valorRuta}" />
+                        <p:outputLabel value="#{bundle.CreateVehiculoHasRutasLabel_rutasCodigoRuta}" for="rutasCodigoRuta" />
+                        <p:selectOneMenu id="rutasCodigoRuta" value="#{vehiculoHasRutasController.selected.rutasCodigoRuta}" required="true" requiredMessage="#{bundle.EditVehiculoHasRutasRequiredMessage_rutasCodigoRuta}">
+                            <f:selectItems value="#{rutasController.itemsAvailableSelectOne}"
+                                           var="rutasCodigoRutaItem"
+                                           itemValue="#{rutasCodigoRutaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateVehiculoHasRutasLabel_vehiculoPlaca}" for="vehiculoPlaca" />
+                        <p:selectOneMenu id="vehiculoPlaca" value="#{vehiculoHasRutasController.selected.vehiculoPlaca}" required="true" requiredMessage="#{bundle.EditVehiculoHasRutasRequiredMessage_vehiculoPlaca}">
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="vehiculoPlacaItem"
+                                           itemValue="#{vehiculoPlacaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vehiculoHasRutasController.create}" value="#{bundle.Save}" update="display,:VehiculoHasRutasListForm:datalist,:growl" oncomplete="handleSubmit(args,'VehiculoHasRutasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VehiculoHasRutasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

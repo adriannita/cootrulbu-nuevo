@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TecnomecanicaEditDlg" widgetVar="TecnomecanicaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTecnomecanicaTitle}">
+            <h:form id="TecnomecanicaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tecnomecanicaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTecnomecanicaLabel_numControl}" for="numControl" />
+                        <p:inputText id="numControl" value="#{tecnomecanicaController.selected.numControl}" title="#{bundle.EditTecnomecanicaTitle_numControl}" required="true" requiredMessage="#{bundle.EditTecnomecanicaRequiredMessage_numControl}"/>
+                        <p:outputLabel value="#{bundle.EditTecnomecanicaLabel_fechaExpedicion}" for="fechaExpedicion" />
+                        <p:calendar id="fechaExpedicion" pattern="MM/dd/yyyy" value="#{tecnomecanicaController.selected.fechaExpedicion}" title="#{bundle.EditTecnomecanicaTitle_fechaExpedicion}" required="true" requiredMessage="#{bundle.EditTecnomecanicaRequiredMessage_fechaExpedicion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTecnomecanicaLabel_fechaVencimiento}" for="fechaVencimiento" />
+                        <p:calendar id="fechaVencimiento" pattern="MM/dd/yyyy" value="#{tecnomecanicaController.selected.fechaVencimiento}" title="#{bundle.EditTecnomecanicaTitle_fechaVencimiento}" required="true" requiredMessage="#{bundle.EditTecnomecanicaRequiredMessage_fechaVencimiento}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTecnomecanicaLabel_numRunt}" for="numRunt" />
+                        <p:inputText id="numRunt" value="#{tecnomecanicaController.selected.numRunt}" title="#{bundle.EditTecnomecanicaTitle_numRunt}" required="true" requiredMessage="#{bundle.EditTecnomecanicaRequiredMessage_numRunt}"/>
+                        <p:outputLabel value="#{bundle.EditTecnomecanicaLabel_aseguradoraCodAsegurador}" for="aseguradoraCodAsegurador" />
+                        <p:selectOneMenu id="aseguradoraCodAsegurador" value="#{tecnomecanicaController.selected.aseguradoraCodAsegurador}" required="true" requiredMessage="#{bundle.EditTecnomecanicaRequiredMessage_aseguradoraCodAsegurador}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{aseguradoraController.itemsAvailableSelectOne}"
+                                           var="aseguradoraCodAseguradorItem"
+                                           itemValue="#{aseguradoraCodAseguradorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTecnomecanicaLabel_centroDiagnosticoidCentroDiagnostico}" for="centroDiagnosticoidCentroDiagnostico" />
+                        <p:selectOneMenu id="centroDiagnosticoidCentroDiagnostico" value="#{tecnomecanicaController.selected.centroDiagnosticoidCentroDiagnostico}" required="true" requiredMessage="#{bundle.EditTecnomecanicaRequiredMessage_centroDiagnosticoidCentroDiagnostico}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{centroDiagnosticoController.itemsAvailableSelectOne}"
+                                           var="centroDiagnosticoidCentroDiagnosticoItem"
+                                           itemValue="#{centroDiagnosticoidCentroDiagnosticoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tecnomecanicaController.update}" value="#{bundle.Save}" update="display,:TecnomecanicaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TecnomecanicaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TecnomecanicaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

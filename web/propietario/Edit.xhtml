@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PropietarioEditDlg" widgetVar="PropietarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPropietarioTitle}">
+            <h:form id="PropietarioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{propietarioController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPropietarioLabel_cedula}" for="cedula" />
+                        <p:inputText id="cedula" value="#{propietarioController.selected.cedula}" title="#{bundle.EditPropietarioTitle_cedula}" required="true" requiredMessage="#{bundle.EditPropietarioRequiredMessage_cedula}"/>
+                        <p:outputLabel value="#{bundle.EditPropietarioLabel_nombre1}" for="nombre1" />
+                        <p:inputText id="nombre1" value="#{propietarioController.selected.nombre1}" title="#{bundle.EditPropietarioTitle_nombre1}" required="true" requiredMessage="#{bundle.EditPropietarioRequiredMessage_nombre1}"/>
+                        <p:outputLabel value="#{bundle.EditPropietarioLabel_nombre2}" for="nombre2" />
+                        <p:inputText id="nombre2" value="#{propietarioController.selected.nombre2}" title="#{bundle.EditPropietarioTitle_nombre2}" />
+                        <p:outputLabel value="#{bundle.EditPropietarioLabel_apellido1}" for="apellido1" />
+                        <p:inputText id="apellido1" value="#{propietarioController.selected.apellido1}" title="#{bundle.EditPropietarioTitle_apellido1}" required="true" requiredMessage="#{bundle.EditPropietarioRequiredMessage_apellido1}"/>
+                        <p:outputLabel value="#{bundle.EditPropietarioLabel_apellido2}" for="apellido2" />
+                        <p:inputText id="apellido2" value="#{propietarioController.selected.apellido2}" title="#{bundle.EditPropietarioTitle_apellido2}" />
+                        <p:outputLabel value="#{bundle.EditPropietarioLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{propietarioController.selected.direccion}" title="#{bundle.EditPropietarioTitle_direccion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{propietarioController.update}" value="#{bundle.Save}" update="display,:PropietarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PropietarioEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PropietarioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

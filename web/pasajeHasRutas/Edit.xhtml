@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PasajeHasRutasEditDlg" widgetVar="PasajeHasRutasEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPasajeHasRutasTitle}">
+            <h:form id="PasajeHasRutasEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pasajeHasRutasController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPasajeHasRutasLabel_idPasajeRuta}" for="idPasajeRuta" />
+                        <p:inputText id="idPasajeRuta" value="#{pasajeHasRutasController.selected.idPasajeRuta}" title="#{bundle.EditPasajeHasRutasTitle_idPasajeRuta}" required="true" requiredMessage="#{bundle.EditPasajeHasRutasRequiredMessage_idPasajeRuta}"/>
+                        <p:outputLabel value="#{bundle.EditPasajeHasRutasLabel_pasajeCodigoPasaje}" for="pasajeCodigoPasaje" />
+                        <p:selectOneMenu id="pasajeCodigoPasaje" value="#{pasajeHasRutasController.selected.pasajeCodigoPasaje}" required="true" requiredMessage="#{bundle.EditPasajeHasRutasRequiredMessage_pasajeCodigoPasaje}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{pasajeController.itemsAvailableSelectOne}"
+                                           var="pasajeCodigoPasajeItem"
+                                           itemValue="#{pasajeCodigoPasajeItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPasajeHasRutasLabel_rutasCodigoRuta}" for="rutasCodigoRuta" />
+                        <p:selectOneMenu id="rutasCodigoRuta" value="#{pasajeHasRutasController.selected.rutasCodigoRuta}" required="true" requiredMessage="#{bundle.EditPasajeHasRutasRequiredMessage_rutasCodigoRuta}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{rutasController.itemsAvailableSelectOne}"
+                                           var="rutasCodigoRutaItem"
+                                           itemValue="#{rutasCodigoRutaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pasajeHasRutasController.update}" value="#{bundle.Save}" update="display,:PasajeHasRutasListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PasajeHasRutasEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PasajeHasRutasEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

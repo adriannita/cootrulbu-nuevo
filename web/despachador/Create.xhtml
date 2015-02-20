@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DespachadorCreateDlg" widgetVar="DespachadorCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDespachadorTitle}">
+            <h:form id="DespachadorCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{despachadorController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDespachadorLabel_codDespachador}" for="codDespachador" />
+                        <p:inputText id="codDespachador" value="#{despachadorController.selected.codDespachador}" title="#{bundle.CreateDespachadorTitle_codDespachador}" required="true" requiredMessage="#{bundle.CreateDespachadorRequiredMessage_codDespachador}"/>
+                        <p:outputLabel value="#{bundle.CreateDespachadorLabel_despachador}" for="despachador" />
+                        <p:inputText id="despachador" value="#{despachadorController.selected.despachador}" title="#{bundle.CreateDespachadorTitle_despachador}" required="true" requiredMessage="#{bundle.CreateDespachadorRequiredMessage_despachador}"/>
+                        <p:outputLabel value="#{bundle.CreateDespachadorLabel_usuarioidUsuario}" for="usuarioidUsuario" />
+                        <p:selectOneMenu id="usuarioidUsuario" value="#{despachadorController.selected.usuarioidUsuario}" required="true" requiredMessage="#{bundle.EditDespachadorRequiredMessage_usuarioidUsuario}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="usuarioidUsuarioItem"
+                                           itemValue="#{usuarioidUsuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{despachadorController.create}" value="#{bundle.Save}" update="display,:DespachadorListForm:datalist,:growl" oncomplete="handleSubmit(args,'DespachadorCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DespachadorCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

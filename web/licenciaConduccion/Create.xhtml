@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LicenciaConduccionCreateDlg" widgetVar="LicenciaConduccionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateLicenciaConduccionTitle}">
+            <h:form id="LicenciaConduccionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{licenciaConduccionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateLicenciaConduccionLabel_numero}" for="numero" />
+                        <p:inputText id="numero" value="#{licenciaConduccionController.selected.numero}" title="#{bundle.CreateLicenciaConduccionTitle_numero}" required="true" requiredMessage="#{bundle.CreateLicenciaConduccionRequiredMessage_numero}"/>
+                        <p:outputLabel value="#{bundle.CreateLicenciaConduccionLabel_fechaNacimiento}" for="fechaNacimiento" />
+                        <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{licenciaConduccionController.selected.fechaNacimiento}" title="#{bundle.EditLicenciaConduccionTitle_fechaNacimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateLicenciaConduccionLabel_fechaExpedicion}" for="fechaExpedicion" />
+                        <p:calendar id="fechaExpedicion" pattern="MM/dd/yyyy" value="#{licenciaConduccionController.selected.fechaExpedicion}" title="#{bundle.EditLicenciaConduccionTitle_fechaExpedicion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateLicenciaConduccionLabel_fechaVencimiento}" for="fechaVencimiento" />
+                        <p:calendar id="fechaVencimiento" pattern="MM/dd/yyyy" value="#{licenciaConduccionController.selected.fechaVencimiento}" title="#{bundle.EditLicenciaConduccionTitle_fechaVencimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateLicenciaConduccionLabel_restricciones}" for="restricciones" />
+                        <p:inputText id="restricciones" value="#{licenciaConduccionController.selected.restricciones}" title="#{bundle.CreateLicenciaConduccionTitle_restricciones}" />
+                        <p:outputLabel value="#{bundle.CreateLicenciaConduccionLabel_conductoresCedula}" for="conductoresCedula" />
+                        <p:selectOneMenu id="conductoresCedula" value="#{licenciaConduccionController.selected.conductoresCedula}" required="true" requiredMessage="#{bundle.EditLicenciaConduccionRequiredMessage_conductoresCedula}">
+                            <f:selectItems value="#{conductoresController.itemsAvailableSelectOne}"
+                                           var="conductoresCedulaItem"
+                                           itemValue="#{conductoresCedulaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{licenciaConduccionController.create}" value="#{bundle.Save}" update="display,:LicenciaConduccionListForm:datalist,:growl" oncomplete="handleSubmit(args,'LicenciaConduccionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LicenciaConduccionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

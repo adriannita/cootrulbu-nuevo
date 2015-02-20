@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PropietarioHasVehiculoEditDlg" widgetVar="PropietarioHasVehiculoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPropietarioHasVehiculoTitle}">
+            <h:form id="PropietarioHasVehiculoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{propietarioHasVehiculoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPropietarioHasVehiculoLabel_idPropietarioVehiculo}" for="idPropietarioVehiculo" />
+                        <p:inputText id="idPropietarioVehiculo" value="#{propietarioHasVehiculoController.selected.idPropietarioVehiculo}" title="#{bundle.EditPropietarioHasVehiculoTitle_idPropietarioVehiculo}" required="true" requiredMessage="#{bundle.EditPropietarioHasVehiculoRequiredMessage_idPropietarioVehiculo}"/>
+                        <p:outputLabel value="#{bundle.EditPropietarioHasVehiculoLabel_propietarioCedula}" for="propietarioCedula" />
+                        <p:selectOneMenu id="propietarioCedula" value="#{propietarioHasVehiculoController.selected.propietarioCedula}" required="true" requiredMessage="#{bundle.EditPropietarioHasVehiculoRequiredMessage_propietarioCedula}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{propietarioController.itemsAvailableSelectOne}"
+                                           var="propietarioCedulaItem"
+                                           itemValue="#{propietarioCedulaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPropietarioHasVehiculoLabel_vehiculoPlaca}" for="vehiculoPlaca" />
+                        <p:selectOneMenu id="vehiculoPlaca" value="#{propietarioHasVehiculoController.selected.vehiculoPlaca}" required="true" requiredMessage="#{bundle.EditPropietarioHasVehiculoRequiredMessage_vehiculoPlaca}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="vehiculoPlacaItem"
+                                           itemValue="#{vehiculoPlacaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{propietarioHasVehiculoController.update}" value="#{bundle.Save}" update="display,:PropietarioHasVehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PropietarioHasVehiculoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PropietarioHasVehiculoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

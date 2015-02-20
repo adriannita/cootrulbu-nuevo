@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AseguradoraCreateDlg" widgetVar="AseguradoraCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAseguradoraTitle}">
+            <h:form id="AseguradoraCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{aseguradoraController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAseguradoraLabel_codAsegurador}" for="codAsegurador" />
+                        <p:inputText id="codAsegurador" value="#{aseguradoraController.selected.codAsegurador}" title="#{bundle.CreateAseguradoraTitle_codAsegurador}" required="true" requiredMessage="#{bundle.CreateAseguradoraRequiredMessage_codAsegurador}"/>
+                        <p:outputLabel value="#{bundle.CreateAseguradoraLabel_aseguradora}" for="aseguradora" />
+                        <p:inputText id="aseguradora" value="#{aseguradoraController.selected.aseguradora}" title="#{bundle.CreateAseguradoraTitle_aseguradora}" required="true" requiredMessage="#{bundle.CreateAseguradoraRequiredMessage_aseguradora}"/>
+                        <p:outputLabel value="#{bundle.CreateAseguradoraLabel_vehiculoPlaca}" for="vehiculoPlaca" />
+                        <p:selectOneMenu id="vehiculoPlaca" value="#{aseguradoraController.selected.vehiculoPlaca}" required="true" requiredMessage="#{bundle.EditAseguradoraRequiredMessage_vehiculoPlaca}">
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="vehiculoPlacaItem"
+                                           itemValue="#{vehiculoPlacaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{aseguradoraController.create}" value="#{bundle.Save}" update="display,:AseguradoraListForm:datalist,:growl" oncomplete="handleSubmit(args,'AseguradoraCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AseguradoraCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

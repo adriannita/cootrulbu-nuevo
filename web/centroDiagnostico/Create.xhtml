@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CentroDiagnosticoCreateDlg" widgetVar="CentroDiagnosticoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCentroDiagnosticoTitle}">
+            <h:form id="CentroDiagnosticoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{centroDiagnosticoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCentroDiagnosticoLabel_idCentroDiagnostico}" for="idCentroDiagnostico" />
+                        <p:inputText id="idCentroDiagnostico" value="#{centroDiagnosticoController.selected.idCentroDiagnostico}" title="#{bundle.CreateCentroDiagnosticoTitle_idCentroDiagnostico}" required="true" requiredMessage="#{bundle.CreateCentroDiagnosticoRequiredMessage_idCentroDiagnostico}"/>
+                        <p:outputLabel value="#{bundle.CreateCentroDiagnosticoLabel_nombreDiagnostico}" for="nombreDiagnostico" />
+                        <p:inputText id="nombreDiagnostico" value="#{centroDiagnosticoController.selected.nombreDiagnostico}" title="#{bundle.CreateCentroDiagnosticoTitle_nombreDiagnostico}" required="true" requiredMessage="#{bundle.CreateCentroDiagnosticoRequiredMessage_nombreDiagnostico}"/>
+                        <p:outputLabel value="#{bundle.CreateCentroDiagnosticoLabel_fechaExpedicion}" for="fechaExpedicion" />
+                        <p:calendar id="fechaExpedicion" pattern="MM/dd/yyyy" value="#{centroDiagnosticoController.selected.fechaExpedicion}" title="#{bundle.EditCentroDiagnosticoTitle_fechaExpedicion}" required="true" requiredMessage="#{bundle.EditCentroDiagnosticoRequiredMessage_fechaExpedicion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCentroDiagnosticoLabel_fechaVencimiento}" for="fechaVencimiento" />
+                        <p:calendar id="fechaVencimiento" pattern="MM/dd/yyyy" value="#{centroDiagnosticoController.selected.fechaVencimiento}" title="#{bundle.EditCentroDiagnosticoTitle_fechaVencimiento}" required="true" requiredMessage="#{bundle.EditCentroDiagnosticoRequiredMessage_fechaVencimiento}" showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{centroDiagnosticoController.create}" value="#{bundle.Save}" update="display,:CentroDiagnosticoListForm:datalist,:growl" oncomplete="handleSubmit(args,'CentroDiagnosticoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CentroDiagnosticoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

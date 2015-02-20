@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConductoresEditDlg" widgetVar="ConductoresEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditConductoresTitle}">
+            <h:form id="ConductoresEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{conductoresController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditConductoresLabel_cedula}" for="cedula" />
+                        <p:inputText id="cedula" value="#{conductoresController.selected.cedula}" title="#{bundle.EditConductoresTitle_cedula}" required="true" requiredMessage="#{bundle.EditConductoresRequiredMessage_cedula}"/>
+                        <p:outputLabel value="#{bundle.EditConductoresLabel_nombre1}" for="nombre1" />
+                        <p:inputText id="nombre1" value="#{conductoresController.selected.nombre1}" title="#{bundle.EditConductoresTitle_nombre1}" required="true" requiredMessage="#{bundle.EditConductoresRequiredMessage_nombre1}"/>
+                        <p:outputLabel value="#{bundle.EditConductoresLabel_nombre2}" for="nombre2" />
+                        <p:inputText id="nombre2" value="#{conductoresController.selected.nombre2}" title="#{bundle.EditConductoresTitle_nombre2}" />
+                        <p:outputLabel value="#{bundle.EditConductoresLabel_apellido1}" for="apellido1" />
+                        <p:inputText id="apellido1" value="#{conductoresController.selected.apellido1}" title="#{bundle.EditConductoresTitle_apellido1}" required="true" requiredMessage="#{bundle.EditConductoresRequiredMessage_apellido1}"/>
+                        <p:outputLabel value="#{bundle.EditConductoresLabel_apellido2}" for="apellido2" />
+                        <p:inputText id="apellido2" value="#{conductoresController.selected.apellido2}" title="#{bundle.EditConductoresTitle_apellido2}" />
+                        <p:outputLabel value="#{bundle.EditConductoresLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{conductoresController.selected.direccion}" title="#{bundle.EditConductoresTitle_direccion}" required="true" requiredMessage="#{bundle.EditConductoresRequiredMessage_direccion}"/>
+                        <p:outputLabel value="#{bundle.EditConductoresLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{conductoresController.selected.telefono}" title="#{bundle.EditConductoresTitle_telefono}" required="true" requiredMessage="#{bundle.EditConductoresRequiredMessage_telefono}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{conductoresController.update}" value="#{bundle.Save}" update="display,:ConductoresListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ConductoresEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConductoresEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

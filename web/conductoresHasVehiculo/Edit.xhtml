@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConductoresHasVehiculoEditDlg" widgetVar="ConductoresHasVehiculoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditConductoresHasVehiculoTitle}">
+            <h:form id="ConductoresHasVehiculoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{conductoresHasVehiculoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditConductoresHasVehiculoLabel_idConductoresVehiculocol}" for="idConductoresVehiculocol" />
+                        <p:inputText id="idConductoresVehiculocol" value="#{conductoresHasVehiculoController.selected.idConductoresVehiculocol}" title="#{bundle.EditConductoresHasVehiculoTitle_idConductoresVehiculocol}" required="true" requiredMessage="#{bundle.EditConductoresHasVehiculoRequiredMessage_idConductoresVehiculocol}"/>
+                        <p:outputLabel value="#{bundle.EditConductoresHasVehiculoLabel_conductoresCedula}" for="conductoresCedula" />
+                        <p:selectOneMenu id="conductoresCedula" value="#{conductoresHasVehiculoController.selected.conductoresCedula}" required="true" requiredMessage="#{bundle.EditConductoresHasVehiculoRequiredMessage_conductoresCedula}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{conductoresController.itemsAvailableSelectOne}"
+                                           var="conductoresCedulaItem"
+                                           itemValue="#{conductoresCedulaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditConductoresHasVehiculoLabel_vehiculoPlaca}" for="vehiculoPlaca" />
+                        <p:selectOneMenu id="vehiculoPlaca" value="#{conductoresHasVehiculoController.selected.vehiculoPlaca}" required="true" requiredMessage="#{bundle.EditConductoresHasVehiculoRequiredMessage_vehiculoPlaca}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="vehiculoPlacaItem"
+                                           itemValue="#{vehiculoPlacaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{conductoresHasVehiculoController.update}" value="#{bundle.Save}" update="display,:ConductoresHasVehiculoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ConductoresHasVehiculoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConductoresHasVehiculoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

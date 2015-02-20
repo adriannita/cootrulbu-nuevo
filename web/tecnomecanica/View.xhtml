@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TecnomecanicaViewDlg" widgetVar="TecnomecanicaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTecnomecanicaTitle}">
+            <h:form id="TecnomecanicaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tecnomecanicaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTecnomecanicaLabel_numControl}"/>
+                        <h:outputText value="#{tecnomecanicaController.selected.numControl}" title="#{bundle.ViewTecnomecanicaTitle_numControl}"/>
+                        <h:outputText value="#{bundle.ViewTecnomecanicaLabel_fechaExpedicion}"/>
+                        <h:outputText value="#{tecnomecanicaController.selected.fechaExpedicion}" title="#{bundle.ViewTecnomecanicaTitle_fechaExpedicion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTecnomecanicaLabel_fechaVencimiento}"/>
+                        <h:outputText value="#{tecnomecanicaController.selected.fechaVencimiento}" title="#{bundle.ViewTecnomecanicaTitle_fechaVencimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTecnomecanicaLabel_numRunt}"/>
+                        <h:outputText value="#{tecnomecanicaController.selected.numRunt}" title="#{bundle.ViewTecnomecanicaTitle_numRunt}"/>
+                        <h:outputText value="#{bundle.ViewTecnomecanicaLabel_aseguradoraCodAsegurador}"/>
+                        <h:outputText value="#{tecnomecanicaController.selected.aseguradoraCodAsegurador}" title="#{bundle.ViewTecnomecanicaTitle_aseguradoraCodAsegurador}"/>
+                        <h:outputText value="#{bundle.ViewTecnomecanicaLabel_centroDiagnosticoidCentroDiagnostico}"/>
+                        <h:outputText value="#{tecnomecanicaController.selected.centroDiagnosticoidCentroDiagnostico}" title="#{bundle.ViewTecnomecanicaTitle_centroDiagnosticoidCentroDiagnostico}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TecnomecanicaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

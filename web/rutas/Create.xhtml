@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RutasCreateDlg" widgetVar="RutasCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRutasTitle}">
+            <h:form id="RutasCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{rutasController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRutasLabel_codigoRuta}" for="codigoRuta" />
+                        <p:inputText id="codigoRuta" value="#{rutasController.selected.codigoRuta}" title="#{bundle.CreateRutasTitle_codigoRuta}" required="true" requiredMessage="#{bundle.CreateRutasRequiredMessage_codigoRuta}"/>
+                        <p:outputLabel value="#{bundle.CreateRutasLabel_ruta}" for="ruta" />
+                        <p:inputText id="ruta" value="#{rutasController.selected.ruta}" title="#{bundle.CreateRutasTitle_ruta}" required="true" requiredMessage="#{bundle.CreateRutasRequiredMessage_ruta}"/>
+                        <p:outputLabel value="#{bundle.CreateRutasLabel_valorRuta}" for="valorRuta" />
+                        <p:inputText id="valorRuta" value="#{rutasController.selected.valorRuta}" title="#{bundle.CreateRutasTitle_valorRuta}" required="true" requiredMessage="#{bundle.CreateRutasRequiredMessage_valorRuta}"/>
+                        <p:outputLabel value="#{bundle.CreateRutasLabel_despachadorCodDespachador}" for="despachadorCodDespachador" />
+                        <p:selectOneMenu id="despachadorCodDespachador" value="#{rutasController.selected.despachadorCodDespachador}" required="true" requiredMessage="#{bundle.EditRutasRequiredMessage_despachadorCodDespachador}">
+                            <f:selectItems value="#{despachadorController.itemsAvailableSelectOne}"
+                                           var="despachadorCodDespachadorItem"
+                                           itemValue="#{despachadorCodDespachadorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{rutasController.create}" value="#{bundle.Save}" update="display,:RutasListForm:datalist,:growl" oncomplete="handleSubmit(args,'RutasCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RutasCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

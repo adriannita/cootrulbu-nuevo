@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SoatCreateDlg" widgetVar="SoatCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSoatTitle}">
+            <h:form id="SoatCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{soatController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSoatLabel_isSoat}" for="isSoat" />
+                        <p:inputText id="isSoat" value="#{soatController.selected.isSoat}" title="#{bundle.CreateSoatTitle_isSoat}" required="true" requiredMessage="#{bundle.CreateSoatRequiredMessage_isSoat}"/>
+                        <p:outputLabel value="#{bundle.CreateSoatLabel_fechaExpedicion}" for="fechaExpedicion" />
+                        <p:calendar id="fechaExpedicion" pattern="MM/dd/yyyy" value="#{soatController.selected.fechaExpedicion}" title="#{bundle.EditSoatTitle_fechaExpedicion}" required="true" requiredMessage="#{bundle.EditSoatRequiredMessage_fechaExpedicion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSoatLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{soatController.selected.fechaInicio}" title="#{bundle.EditSoatTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditSoatRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSoatLabel_fechaVencimiento}" for="fechaVencimiento" />
+                        <p:calendar id="fechaVencimiento" pattern="MM/dd/yyyy" value="#{soatController.selected.fechaVencimiento}" title="#{bundle.EditSoatTitle_fechaVencimiento}" required="true" requiredMessage="#{bundle.EditSoatRequiredMessage_fechaVencimiento}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSoatLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{soatController.selected.valor}" title="#{bundle.CreateSoatTitle_valor}" required="true" requiredMessage="#{bundle.CreateSoatRequiredMessage_valor}"/>
+                        <p:outputLabel value="#{bundle.CreateSoatLabel_aseguradoraCodAsegurador}" for="aseguradoraCodAsegurador" />
+                        <p:selectOneMenu id="aseguradoraCodAsegurador" value="#{soatController.selected.aseguradoraCodAsegurador}" required="true" requiredMessage="#{bundle.EditSoatRequiredMessage_aseguradoraCodAsegurador}">
+                            <f:selectItems value="#{aseguradoraController.itemsAvailableSelectOne}"
+                                           var="aseguradoraCodAseguradorItem"
+                                           itemValue="#{aseguradoraCodAseguradorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{soatController.create}" value="#{bundle.Save}" update="display,:SoatListForm:datalist,:growl" oncomplete="handleSubmit(args,'SoatCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SoatCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

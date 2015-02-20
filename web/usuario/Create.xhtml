@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioCreateDlg" widgetVar="UsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsuarioTitle}">
+            <h:form id="UsuarioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_idUsuario}" for="idUsuario" />
+                        <p:inputText id="idUsuario" value="#{usuarioController.selected.idUsuario}" title="#{bundle.CreateUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_idUsuario}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_contraseña}" for="contraseña" />
+                        <p:inputText id="contraseña" value="#{usuarioController.selected.contraseña}" title="#{bundle.CreateUsuarioTitle_contraseña}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_contraseña}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_cedula}" for="cedula" />
+                        <p:inputText id="cedula" value="#{usuarioController.selected.cedula}" title="#{bundle.CreateUsuarioTitle_cedula}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_cedula}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre1}" for="nombre1" />
+                        <p:inputText id="nombre1" value="#{usuarioController.selected.nombre1}" title="#{bundle.CreateUsuarioTitle_nombre1}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nombre1}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombre2}" for="nombre2" />
+                        <p:inputText id="nombre2" value="#{usuarioController.selected.nombre2}" title="#{bundle.CreateUsuarioTitle_nombre2}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nombre2}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_apellido1}" for="apellido1" />
+                        <p:inputText id="apellido1" value="#{usuarioController.selected.apellido1}" title="#{bundle.CreateUsuarioTitle_apellido1}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_apellido1}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_apellido2}" for="apellido2" />
+                        <p:inputText id="apellido2" value="#{usuarioController.selected.apellido2}" title="#{bundle.CreateUsuarioTitle_apellido2}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_apellido2}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.CreateUsuarioTitle_telefono}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_telefono}"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_cargoidCargo}" for="cargoidCargo" />
+                        <p:selectOneMenu id="cargoidCargo" value="#{usuarioController.selected.cargoidCargo}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_cargoidCargo}">
+                            <f:selectItems value="#{cargoController.itemsAvailableSelectOne}"
+                                           var="cargoidCargoItem"
+                                           itemValue="#{cargoidCargoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_rolesCodRol}" for="rolesCodRol" />
+                        <p:selectOneMenu id="rolesCodRol" value="#{usuarioController.selected.rolesCodRol}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_rolesCodRol}">
+                            <f:selectItems value="#{rolesController.itemsAvailableSelectOne}"
+                                           var="rolesCodRolItem"
+                                           itemValue="#{rolesCodRolItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

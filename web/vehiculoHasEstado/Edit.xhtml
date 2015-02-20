@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VehiculoHasEstadoEditDlg" widgetVar="VehiculoHasEstadoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVehiculoHasEstadoTitle}">
+            <h:form id="VehiculoHasEstadoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vehiculoHasEstadoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditVehiculoHasEstadoLabel_idEstadoVehiculo}" for="idEstadoVehiculo" />
+                        <p:inputText id="idEstadoVehiculo" value="#{vehiculoHasEstadoController.selected.idEstadoVehiculo}" title="#{bundle.EditVehiculoHasEstadoTitle_idEstadoVehiculo}" required="true" requiredMessage="#{bundle.EditVehiculoHasEstadoRequiredMessage_idEstadoVehiculo}"/>
+                        <p:outputLabel value="#{bundle.EditVehiculoHasEstadoLabel_estadoVehiculoidEstado}" for="estadoVehiculoidEstado" />
+                        <p:selectOneMenu id="estadoVehiculoidEstado" value="#{vehiculoHasEstadoController.selected.estadoVehiculoidEstado}" required="true" requiredMessage="#{bundle.EditVehiculoHasEstadoRequiredMessage_estadoVehiculoidEstado}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estadoController.itemsAvailableSelectOne}"
+                                           var="estadoVehiculoidEstadoItem"
+                                           itemValue="#{estadoVehiculoidEstadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditVehiculoHasEstadoLabel_vehiculoPlaca}" for="vehiculoPlaca" />
+                        <p:selectOneMenu id="vehiculoPlaca" value="#{vehiculoHasEstadoController.selected.vehiculoPlaca}" required="true" requiredMessage="#{bundle.EditVehiculoHasEstadoRequiredMessage_vehiculoPlaca}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{vehiculoController.itemsAvailableSelectOne}"
+                                           var="vehiculoPlacaItem"
+                                           itemValue="#{vehiculoPlacaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vehiculoHasEstadoController.update}" value="#{bundle.Save}" update="display,:VehiculoHasEstadoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VehiculoHasEstadoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VehiculoHasEstadoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

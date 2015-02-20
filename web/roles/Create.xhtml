@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RolesCreateDlg" widgetVar="RolesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRolesTitle}">
+            <h:form id="RolesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{rolesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRolesLabel_codRol}" for="codRol" />
+                        <p:inputText id="codRol" value="#{rolesController.selected.codRol}" title="#{bundle.CreateRolesTitle_codRol}" required="true" requiredMessage="#{bundle.CreateRolesRequiredMessage_codRol}"/>
+                        <p:outputLabel value="#{bundle.CreateRolesLabel_nombreRol}" for="nombreRol" />
+                        <p:inputText id="nombreRol" value="#{rolesController.selected.nombreRol}" title="#{bundle.CreateRolesTitle_nombreRol}" required="true" requiredMessage="#{bundle.CreateRolesRequiredMessage_nombreRol}"/>
+                        <p:outputLabel value="#{bundle.CreateRolesLabel_gerente}" for="gerente" />
+                        <p:inputText id="gerente" value="#{rolesController.selected.gerente}" title="#{bundle.CreateRolesTitle_gerente}" required="true" requiredMessage="#{bundle.CreateRolesRequiredMessage_gerente}"/>
+                        <p:outputLabel value="#{bundle.CreateRolesLabel_tesorera}" for="tesorera" />
+                        <p:inputText id="tesorera" value="#{rolesController.selected.tesorera}" title="#{bundle.CreateRolesTitle_tesorera}" required="true" requiredMessage="#{bundle.CreateRolesRequiredMessage_tesorera}"/>
+                        <p:outputLabel value="#{bundle.CreateRolesLabel_despachador}" for="despachador" />
+                        <p:inputText id="despachador" value="#{rolesController.selected.despachador}" title="#{bundle.CreateRolesTitle_despachador}" required="true" requiredMessage="#{bundle.CreateRolesRequiredMessage_despachador}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{rolesController.create}" value="#{bundle.Save}" update="display,:RolesListForm:datalist,:growl" oncomplete="handleSubmit(args,'RolesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RolesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

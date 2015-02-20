@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RolesEditDlg" widgetVar="RolesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRolesTitle}">
+            <h:form id="RolesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{rolesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRolesLabel_codRol}" for="codRol" />
+                        <p:inputText id="codRol" value="#{rolesController.selected.codRol}" title="#{bundle.EditRolesTitle_codRol}" required="true" requiredMessage="#{bundle.EditRolesRequiredMessage_codRol}"/>
+                        <p:outputLabel value="#{bundle.EditRolesLabel_nombreRol}" for="nombreRol" />
+                        <p:inputText id="nombreRol" value="#{rolesController.selected.nombreRol}" title="#{bundle.EditRolesTitle_nombreRol}" required="true" requiredMessage="#{bundle.EditRolesRequiredMessage_nombreRol}"/>
+                        <p:outputLabel value="#{bundle.EditRolesLabel_gerente}" for="gerente" />
+                        <p:inputText id="gerente" value="#{rolesController.selected.gerente}" title="#{bundle.EditRolesTitle_gerente}" required="true" requiredMessage="#{bundle.EditRolesRequiredMessage_gerente}"/>
+                        <p:outputLabel value="#{bundle.EditRolesLabel_tesorera}" for="tesorera" />
+                        <p:inputText id="tesorera" value="#{rolesController.selected.tesorera}" title="#{bundle.EditRolesTitle_tesorera}" required="true" requiredMessage="#{bundle.EditRolesRequiredMessage_tesorera}"/>
+                        <p:outputLabel value="#{bundle.EditRolesLabel_despachador}" for="despachador" />
+                        <p:inputText id="despachador" value="#{rolesController.selected.despachador}" title="#{bundle.EditRolesTitle_despachador}" required="true" requiredMessage="#{bundle.EditRolesRequiredMessage_despachador}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{rolesController.update}" value="#{bundle.Save}" update="display,:RolesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RolesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RolesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

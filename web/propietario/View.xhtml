@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PropietarioViewDlg" widgetVar="PropietarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPropietarioTitle}">
+            <h:form id="PropietarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{propietarioController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_cedula}"/>
+                        <h:outputText value="#{propietarioController.selected.cedula}" title="#{bundle.ViewPropietarioTitle_cedula}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_nombre1}"/>
+                        <h:outputText value="#{propietarioController.selected.nombre1}" title="#{bundle.ViewPropietarioTitle_nombre1}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_nombre2}"/>
+                        <h:outputText value="#{propietarioController.selected.nombre2}" title="#{bundle.ViewPropietarioTitle_nombre2}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_apellido1}"/>
+                        <h:outputText value="#{propietarioController.selected.apellido1}" title="#{bundle.ViewPropietarioTitle_apellido1}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_apellido2}"/>
+                        <h:outputText value="#{propietarioController.selected.apellido2}" title="#{bundle.ViewPropietarioTitle_apellido2}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_direccion}"/>
+                        <h:outputText value="#{propietarioController.selected.direccion}" title="#{bundle.ViewPropietarioTitle_direccion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PropietarioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

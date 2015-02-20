@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ConductoresCreateDlg" widgetVar="ConductoresCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateConductoresTitle}">
+            <h:form id="ConductoresCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{conductoresController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateConductoresLabel_cedula}" for="cedula" />
+                        <p:inputText id="cedula" value="#{conductoresController.selected.cedula}" title="#{bundle.CreateConductoresTitle_cedula}" required="true" requiredMessage="#{bundle.CreateConductoresRequiredMessage_cedula}"/>
+                        <p:outputLabel value="#{bundle.CreateConductoresLabel_nombre1}" for="nombre1" />
+                        <p:inputText id="nombre1" value="#{conductoresController.selected.nombre1}" title="#{bundle.CreateConductoresTitle_nombre1}" required="true" requiredMessage="#{bundle.CreateConductoresRequiredMessage_nombre1}"/>
+                        <p:outputLabel value="#{bundle.CreateConductoresLabel_nombre2}" for="nombre2" />
+                        <p:inputText id="nombre2" value="#{conductoresController.selected.nombre2}" title="#{bundle.CreateConductoresTitle_nombre2}" />
+                        <p:outputLabel value="#{bundle.CreateConductoresLabel_apellido1}" for="apellido1" />
+                        <p:inputText id="apellido1" value="#{conductoresController.selected.apellido1}" title="#{bundle.CreateConductoresTitle_apellido1}" required="true" requiredMessage="#{bundle.CreateConductoresRequiredMessage_apellido1}"/>
+                        <p:outputLabel value="#{bundle.CreateConductoresLabel_apellido2}" for="apellido2" />
+                        <p:inputText id="apellido2" value="#{conductoresController.selected.apellido2}" title="#{bundle.CreateConductoresTitle_apellido2}" />
+                        <p:outputLabel value="#{bundle.CreateConductoresLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{conductoresController.selected.direccion}" title="#{bundle.CreateConductoresTitle_direccion}" required="true" requiredMessage="#{bundle.CreateConductoresRequiredMessage_direccion}"/>
+                        <p:outputLabel value="#{bundle.CreateConductoresLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{conductoresController.selected.telefono}" title="#{bundle.CreateConductoresTitle_telefono}" required="true" requiredMessage="#{bundle.CreateConductoresRequiredMessage_telefono}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{conductoresController.create}" value="#{bundle.Save}" update="display,:ConductoresListForm:datalist,:growl" oncomplete="handleSubmit(args,'ConductoresCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ConductoresCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
